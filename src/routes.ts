@@ -11,6 +11,8 @@ import { DeleteVehicleController } from "./controllers/veiculo/DeleteVehicleCont
 import { ListAllVehiclesController } from "./controllers/veiculo/ListAllVehiclesController";
 import { ListVehiclePlacaController } from "./controllers/veiculo/ListVehiclePlacaController";
 import { EditVehicleController } from "./controllers/veiculo/EditVehicleController";
+import { CreateServiceController } from "./controllers/servico/CreateServiceController";
+import { DeleteServiceController } from "./controllers/servico/DeleteServiceController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"))
@@ -33,4 +35,7 @@ router.get("/veiculos/todos", isAuthenticated, new ListAllVehiclesController().h
 router.get("/veiculos/placa", isAuthenticated, new ListVehiclePlacaController().handle)
 router.put("/veiculos/edicao", isAuthenticated, upload.single("imagem"), new EditVehicleController().handle)
 
+// ROTAS DE SERVICO
+router.post("/servicos", isAuthenticated, new CreateServiceController().handle)
+router.delete("/servicos/remove", isAuthenticated, new DeleteServiceController().handle)
 export { router }
