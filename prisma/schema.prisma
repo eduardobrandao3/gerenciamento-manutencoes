@@ -51,9 +51,9 @@ model Veiculo{
 
 model Servico{
   id String @id @default(uuid())
-  descricao String
+  descricao String?
   preco Float
-  data_realizacao DateTime
+  data_realizacao String
   km Float
   oficina String
 
