@@ -6,6 +6,7 @@ import { AuthUserController } from "./controllers/usuario/AuthUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 import { DetailUserController } from "./controllers/usuario/DetailUserController";
 import { EditUserController } from "./controllers/usuario/EditUserController";
+import { CreateVehicleController } from "./controllers/veiculo/CreateVehicleController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"))
@@ -19,5 +20,9 @@ router.post("/usuarios", upload.single("foto"), new CreateUserController().handl
 router.post("/secao", new AuthUserController().handle)
 router.get("/pessoal", isAuthenticated, new DetailUserController().handle)
 router.put("/usuarios/edit", isAuthenticated, upload.single("foto"), new EditUserController().handle)
+
+
+// ROTAS DE VEÍCULO
+router.post("/veiculos", isAuthenticated, upload.single("imagem"), new CreateVehicleController().handle)
 
 export { router }
