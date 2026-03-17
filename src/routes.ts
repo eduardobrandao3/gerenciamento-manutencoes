@@ -7,6 +7,8 @@ import { isAuthenticated } from "./middlewares/isAuthenticated";
 import { DetailUserController } from "./controllers/usuario/DetailUserController";
 import { EditUserController } from "./controllers/usuario/EditUserController";
 import { CreateVehicleController } from "./controllers/veiculo/CreateVehicleController";
+import { DeleteVehicleController } from "./controllers/veiculo/DeleteVehicleController";
+import { ListAllVehiclesController } from "./controllers/veiculo/ListAllVehiclesController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"))
@@ -24,5 +26,6 @@ router.put("/usuarios/edit", isAuthenticated, upload.single("foto"), new EditUse
 
 // ROTAS DE VEÍCULO
 router.post("/veiculos", isAuthenticated, upload.single("imagem"), new CreateVehicleController().handle)
-
+router.delete("/veiculos/remove", isAuthenticated, new DeleteVehicleController().handle)
+router.get("/veiculos/todos", isAuthenticated, new ListAllVehiclesController().handle)
 export { router }
