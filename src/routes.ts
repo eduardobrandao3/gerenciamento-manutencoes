@@ -9,6 +9,7 @@ import { EditUserController } from "./controllers/usuario/EditUserController";
 import { CreateVehicleController } from "./controllers/veiculo/CreateVehicleController";
 import { DeleteVehicleController } from "./controllers/veiculo/DeleteVehicleController";
 import { ListAllVehiclesController } from "./controllers/veiculo/ListAllVehiclesController";
+import { ListVehiclePlacaController } from "./controllers/veiculo/ListVehiclePlacaController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"))
@@ -28,4 +29,6 @@ router.put("/usuarios/edit", isAuthenticated, upload.single("foto"), new EditUse
 router.post("/veiculos", isAuthenticated, upload.single("imagem"), new CreateVehicleController().handle)
 router.delete("/veiculos/remove", isAuthenticated, new DeleteVehicleController().handle)
 router.get("/veiculos/todos", isAuthenticated, new ListAllVehiclesController().handle)
+router.get("/veiculos/placa", isAuthenticated, new ListVehiclePlacaController().handle)
+
 export { router }
