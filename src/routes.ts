@@ -16,6 +16,7 @@ import { DeleteServiceController } from "./controllers/servico/DeleteServiceCont
 import { ListAllServicesController } from "./controllers/servico/ListAllServicesController";
 import { ListServicesByPlacaController } from "./controllers/servico/ListServicesByPlacaController";
 import { ListServicesByIdController } from "./controllers/servico/ListServicesByIdController";
+import { EditServicesController } from "./controllers/servico/EditServicesController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"))
@@ -44,5 +45,6 @@ router.delete("/servicos/remove", isAuthenticated, new DeleteServiceController()
 router.get("/servicos/todos", isAuthenticated, new ListAllServicesController().handle)
 router.get("/servicos/placa", isAuthenticated, new ListServicesByPlacaController().handle)
 router.get("/servicos/id", isAuthenticated, new ListServicesByIdController().handle)
+router.put("/servicos/edicao", isAuthenticated, new EditServicesController().handle)
 
 export { router }
