@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario{
+  cpf String @id
+  nome String
+  telefone String
+  email String @unique
+  senha String
+  foto String?
+
+  criado_em DateTime @default(now())
+  atualizado_em DateTime @updatedAt
+
+  veiculos Veiculo[]
+
+  @@map("usuarios")
+}
+
+model Veiculo{
+  placa String @id
+  marca String
+  modelo String
+  ano_fabricacao Int
+  cor String
+  imagem String? //a uinterrogação serve para q seja opcional
+  descricao String?  
+
+  criado_em DateTime @default(now())
+  atualizado_em DateTime @updatedAt
+
+  usuario Usuario @relation(fields: [usuario_cpf], references: [cpf])
+  usuario_cpf String
+
+  servicos Servico[]
+
+  @@map("veiculos")
+}
+
+model Servico{
+  id String @id @default(uuid())
+  descricao String?
+  preco Float
+  data_realizacao String
+  km Float
+  oficina String
+
+  criado_em DateTime @default(now())
+  atualizado_em DateTime @updatedAt
+
+  veiculo Veiculo @relation(fields: [veiculo_placa], references: [placa])
+  veiculo_placa String
+
+  @@map("servicos")
+}
