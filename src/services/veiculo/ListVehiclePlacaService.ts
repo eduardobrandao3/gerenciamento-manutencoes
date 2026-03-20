@@ -23,6 +23,9 @@ class ListVehiclePlacaService{
       }
     })
 
+    if(!veiculo){
+      throw new Error("Veiculo nao encontrado ou nao pertence ao solicitante")
+    }
     return veiculo;
   }
 }

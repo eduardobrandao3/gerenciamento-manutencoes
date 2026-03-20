@@ -39,6 +39,9 @@ class ListServicesByIdService{
       }
     })
 
+    if(!servicos){
+      throw new Error("Servico nao encontrado ou nao pertence ao solicitante")
+    }
     return servicos
   }
 }
