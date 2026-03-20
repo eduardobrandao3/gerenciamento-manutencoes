@@ -4,5 +4,6 @@ export interface UserRequest {
   telefone: string;
   email: string;
   senha: string;
+  confirmaSenha: string;
   foto?: string;
 }

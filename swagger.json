@@ -1,0 +1,1107 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Gerenciador de Manutenções",
+    "description": "API para gerenciar manutenções de donos de veículos",
+    "termOfSerice": "http://localhost:3333/termos",
+    "contact": {
+      "email": "eduardobrandao0311@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/usuarios": {
+      "post": {
+        "description": "Criar novo usuario",
+        "requestBody": {
+          "description": "Dados necessarios para criacao de novo usuario",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCreateUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCreateUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/secao": {
+      "post": {
+        "description": "Login de usuario",
+        "requestBody": {
+          "description": "Dados necessarios para realizar login de usuario",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestLoginUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseLoginUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/pessoal": {
+      "get": {
+        "description": "Buscar usuario q esta logado",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informacoes do usuario buscadas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseGetUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/usuarios/edit": {
+      "put": {
+        "description": "Edicao de usuario",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Dados necessarios para editar usuario",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestEditUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Edicao do usuario realizada do com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCreateUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/veiculos": {
+      "post": {
+        "description": "Criar novo veiculo",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Dados necessários para criar novo veiculo",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCreateVehicle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Veiculo criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCreateVehicle"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/veiculos/remove": {
+      "delete": {
+        "description": "Remover veiculos pela placa",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "placa",
+            "in": "query",
+            "description": "Placa do veiculo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Veiculo removido com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseRemoveVehicle"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/veiculos/edicao": {
+      "put": {
+        "description": "Editar veiculo",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "placa",
+            "in": "query",
+            "description": "Placa do veiculo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "description": "Dados necessários para editar um veiculo",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestEditVehicle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Veiculo editado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCreateVehicle"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/veiculos/todos": {
+      "get": {
+        "description": "Buscar todos os veiculos do usuario",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informacoes do veiculo buscadas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseGetAllVehicles"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/veiculos/placa": {
+      "get": {
+        "description": "Buscar veiculos do usuario pela placa",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "placa",
+            "in": "query",
+            "description": "Placa do veiculo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informacoes do veiculo buscadas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseGetVehicle"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/servicos": {
+      "post": {
+        "description": "Criar servico",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "veiculo_placa",
+            "in": "query",
+            "description": "Placa do veiculo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "description": "Dados necessarios para criar novo servico",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCreateService"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Servico criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCreateService"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/servicos/remove": {
+      "delete": {
+        "description": "Remover servicos pelo Id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id_servico",
+            "in": "query",
+            "description": "ID do servico",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "veiculo_placa",
+            "in": "query",
+            "description": "Placa do veiculo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Servico removido com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCreateService"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/servicos/edicao": {
+      "put": {
+        "description": "Editar servico",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "veiculo_placa",
+            "in": "query",
+            "description": "Placa do veiculo",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID do servico",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "description": "Dados necessarios para editar servico",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestEditService"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Servico editado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseGetServiceId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/servicos/todos": {
+      "get": {
+        "description": "Buscar todos os servicos do usuario",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informacoes dos servicos buscadas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseGetAllServices"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/servicos/id": {
+      "get": {
+        "description": "Buscar servico pelo ID",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id_servico",
+            "in": "query",
+            "description": "ID do servico",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informacoes do servico buscadas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseGetServiceId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v1/servicos/placa": {
+      "get": {
+        "description": "Buscar servicos pela placa do veiculo",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "veiculo_placa",
+            "in": "query",
+            "description": "Placa do veiculo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informacoes ds servicos buscadas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseGetAllServices"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Recurso não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RequestCreateUser": {
+        "type": "object",
+        "properties": {
+          "cpf": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          },
+          "confirmaSenha": {
+            "type": "string"
+          },
+          "foto": {
+            "type": "string",
+            "format": "binary"
+          }
+        },
+        "required": ["cpf", "nome", "email", "telefone", "senha", "confirmaSenha"]
+      },
+      "ResponseCreateUser": {
+        "type": "object",
+        "properties": {
+          "cpf": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "foto": {
+            "type": "string"
+          }
+        }
+      },
+      "RequestLoginUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          }
+        },
+        "required": ["email", "senha"]
+      },
+      "ResponseLoginUser": {
+        "type": "object",
+        "properties": {
+          "cpf": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "foto": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseGetUser": {
+        "type": "object",
+        "properties": {
+          "cpf": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "foto": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "RequestEditUser": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          },
+          "confirmaSenha": {
+            "type": "string"
+          },
+          "foto": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "RequestCreateVehicle": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string"
+          },
+          "marca": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "ano_fabricacao": {
+            "type": "number"
+          },
+          "cor": {
+            "type": "string"
+          },
+          "imagem": {
+            "type": "string",
+            "format": "binary"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        },
+        "required": ["placa", "marca", "modelo", "ano_fabricacao", "cor"]
+      },
+      "ResponseCreateVehicle": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string"
+          },
+          "marca": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "ano_fabricacao": {
+            "type": "number"
+          },
+          "cor": {
+            "type": "string"
+          },
+          "imagem": {
+            "type": "string",
+            "format": "binary"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseRemoveVehicle": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "RequestEditVehicle": {
+        "type": "object",
+        "properties": {
+          "marca": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "ano_fabricacao": {
+            "type": "number"
+          },
+          "cor": {
+            "type": "string"
+          },
+          "imagem": {
+            "type": "string",
+            "format": "binary"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseGetAllVehicles": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "placa": {
+              "type": "string"
+            },
+            "marca": {
+              "type": "string"
+            },
+            "modelo": {
+              "type": "string"
+            },
+            "ano_fabricacao": {
+              "type": "number"
+            },
+            "cor": {
+              "type": "string"
+            },
+            "imagem": {
+              "type": "string"
+            },
+            "descricao": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ResponseGetVehicle": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string"
+          },
+          "marca": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "ano_fabricacao": {
+            "type": "number"
+          },
+          "cor": {
+            "type": "string"
+          },
+          "imagem": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      },
+      "RequestCreateService": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number"
+          },
+          "km": {
+            "type": "number"
+          },
+          "oficina": {
+            "type": "string"
+          },
+          "data_realizacao": {
+            "type": "string"
+          }
+        },
+        "required": ["preco", "km", "oficina", "data_realizacao"]
+      },
+      "ResponseCreateService": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "placa": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number"
+          },
+          "km": {
+            "type": "number"
+          },
+          "oficina": {
+            "type": "string"
+          },
+          "data_realizacao": {
+            "type": "string"
+          }
+        }
+      },
+      "RequestEditService": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number"
+          },
+          "km": {
+            "type": "number"
+          },
+          "oficina": {
+            "type": "string"
+          },
+          "data_realizacao": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseGetAllServices": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "veiculo_placa": {
+              "type": "string"
+            },
+            "preco": {
+              "type": "number"
+            },
+            "km": {
+              "type": "number"
+            },
+            "oficina": {
+              "type": "string"
+            },
+            "data_realizacao": {
+              "type": "string"
+            },
+            "descricao": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ResponseGetServiceId": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number"
+          },
+          "km": {
+            "type": "number"
+          },
+          "oficina": {
+            "type": "string"
+          },
+          "data_realizacao": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "description": "Autenticação utilizando json web token",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

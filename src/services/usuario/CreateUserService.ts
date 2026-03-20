@@ -3,11 +3,14 @@ import { hash } from "bcryptjs";
 import { UserRequest } from "../../models/interfaces/usuario/UserRequest";
 
 class CreateUserService {
-  async execute({cpf, nome, telefone, email, senha, foto}: UserRequest){
+  async execute({cpf, nome, telefone, email, senha, foto, confirmaSenha}: UserRequest){
     if(!cpf || !nome || !telefone || !email || !senha){
       throw new Error("É necessário preencher todos os campos obrigatórios (CPF, Nome, Telefone, E-mail e Senha");
     }
 
+    if(senha !== confirmaSenha){
+      throw new Error("As senhas nao conferem")
+    }
     // verifica se já existe usuario com cpf ou email
     const usuarioExistenteCPF = await prismaClient.usuario.findFirst({
       where: {
