@@ -7,7 +7,7 @@ import path from "path";
 import cors from "cors";
 
 const app = express();
-const port = 3333;
+const port = Number(process.env.PORT) || 3333;
 app.use(express.json());
 app.use(cors())
 app.use("/v1", router);
@@ -30,6 +30,6 @@ app.get("/termos", (req: Request, resp: Response) => {
     message: "Termos de Serviço"
   })
 })
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Servidor rodando na porta ${port} - Projeto de Gerenciamento de Manutenções`)
 })
