@@ -23,6 +23,7 @@ class ListServicesByPlacaService{
         veiculo_placa: veiculo_placa
       },
       select: {
+        id: true,
         veiculo_placa: true,
         preco: true,
         km: true,

@@ -732,12 +732,15 @@
           "senha": {
             "type": "string"
           },
+          "confirmaSenha": {
+            "type": "string"
+          },
           "foto": {
             "type": "string",
             "format": "binary"
           }
         },
-        "required": ["cpf", "nome", "email", "telefone", "senha"]
+        "required": ["cpf", "nome", "email", "telefone", "senha", "confirmaSenha"]
       },
       "ResponseCreateUser": {
         "type": "object",
@@ -996,6 +999,9 @@
       "ResponseCreateService": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "placa": {
             "type": "string"
           },
@@ -1041,6 +1047,9 @@
         "items": {
           "type": "object",
           "properties": {
+            "id": {
+              "type": "string"
+            },
             "veiculo_placa": {
               "type": "string"
             },

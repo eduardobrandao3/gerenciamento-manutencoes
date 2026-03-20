@@ -25,6 +25,7 @@ class ListAllServicesService{
         }
       },
       select: {
+        id: true,
         veiculo_placa: true,
         preco: true,
         km: true,
