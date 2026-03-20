@@ -25,9 +25,10 @@ class DeleteServiceService {
     const servicoRemovido = await prismaClient.servico.delete({
       where: {
         id: id_servico,
-        veiculo_placa: veiculo_placa, 
+        veiculo_placa: veiculo_placa,
       },
       select: {
+        id: true,
         veiculo_placa: true,
         preco: true,
         km: true,
