@@ -13,7 +13,9 @@ class CreateUserController{
 
     const usuario = await createUserService.execute({cpf, nome, email, telefone, senha, foto, confirmaSenha})
     
-    return resp.json(usuario)
+    return resp.json({
+      message: `Usuário de nome '${usuario.nome}' cadastrado com sucesso!`
+    })
   }
 }
 
