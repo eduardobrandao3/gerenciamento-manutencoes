@@ -59,6 +59,7 @@ class EditUserService {
       data: data,
       select: {
         cpf: true,
+        telefone: true,
         nome: true,
         email: true,
         foto: true,

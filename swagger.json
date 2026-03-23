@@ -748,6 +748,9 @@
           "cpf": {
             "type": "string"
           },
+          "telefone": {
+            "type": "string"
+          },
           "nome": {
             "type": "string"
           },
@@ -798,6 +801,9 @@
             "type": "string"
           },
           "nome": {
+            "type": "string"
+          },
+          "telefone": {
             "type": "string"
           },
           "email": {
